@@ -1,18 +1,21 @@
 import React, { useState } from "react";
-
-function AddForm() {
+import PropTypes from "prop-types";
+function AddForm({ onAddMovie }) {
   const [title, setTitle] = useState("");
   const [rate, setRate] = useState("");
   const [url, setUrl] = useState("");
   const [description, setDescription] = useState("");
-
-  const Submit = (event) => {
+  AddForm.propTypes = {
+    onAddMovie: PropTypes.func.isRequired,
+  };
+  const handleSubmit = (event) => {
     event.preventDefault();
     const newMovie = {
+      id: Math.random(),
       title: title,
-      rate: rate,
-      url: url,
       description: description,
+      posterURL: url,
+      rating: rate,
     };
     onAddMovie(newMovie);
     setTitle("");
@@ -20,6 +23,7 @@ function AddForm() {
     setUrl("");
     setDescription("");
   };
+
   return (
     <div>
       <label
@@ -45,10 +49,10 @@ function AddForm() {
       <input type="checkbox" id="my-modal-4" className="modal-toggle" />
       <label htmlFor="my-modal-4" className="modal cursor-pointer">
         <label className="modal-box relative" htmlFor="">
-          {/* <h3 className="text-lg font-bold">
-            Congratulations random Internet user!
-          </h3> */}
-          <form className="py-4 flex flex-col justify-center items-center">
+          <form
+            className="py-4 flex flex-col justify-center items-center"
+            onSubmit={handleSubmit}
+          >
             <div className="form-control my-2">
               <label className="input-group ">
                 <span>Title</span>
@@ -56,6 +60,8 @@ function AddForm() {
                   type="text"
                   placeholder="Enter Title 💬"
                   className="input input-bordered w-full max-w-xs"
+                  value={title}
+                  onChange={(event) => setTitle(event.target.value)}
                 />
               </label>
             </div>
@@ -63,9 +69,12 @@ function AddForm() {
               <label className="input-group">
                 <span>Rate</span>
                 <input
-                  type="number"
+                  min="5"
+                  type="text"
                   placeholder="Enter Rate ⭐"
                   className="input input-bordered w-full max-w-xs"
+                  value={rate}
+                  onChange={(event) => setRate(event.target.value)}
                 />
               </label>
             </div>
@@ -73,9 +82,11 @@ function AddForm() {
               <label className="input-group">
                 <span>Url</span>
                 <input
-                  type="number"
+                  type="text"
                   placeholder="Enter Url 🔗"
                   className="input input-bordered w-full max-w-xs"
+                  value={url}
+                  onChange={(event) => setUrl(event.target.value)}
                 />
               </label>
             </div>
@@ -83,11 +94,16 @@ function AddForm() {
               <textarea
                 className="textarea textarea-bordered w-96"
                 placeholder="Movie Description"
+                value={description}
+                onChange={(event) => setDescription(event.target.value)}
               ></textarea>
             </div>
             <div className="form-control my-2">
-              <button className="inline-block rounded border border-current px-8 py-3 mt-4 text-sm font-medium text-gray-200 transition hover:-rotate-2 hover:scale-110 focus:outline-none focus:ring active:text-indigo-500">
-                Download
+              <button
+                type="submit"
+                className="inline-block rounded border border-current px-8 py-3 mt-4 text-sm font-medium text-gray-200 transition hover:-rotate-2 hover:scale-110 focus:outline-none focus:ring active:text-indigo-500"
+              >
+                Add Movie
               </button>
             </div>
           </form>

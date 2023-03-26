@@ -64,7 +64,6 @@ function Filter({
           </svg>
         </button>
       </div>
-      <AddForm />
     </div>
   );
 }
