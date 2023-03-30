@@ -1,6 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const MovieCard = ({ title, description, posterURL, rating }) => {
+const MovieCard = ({ id, title, description, posterURL, rating, trailer }) => {
   return (
     <div className="bg-transparent py-6 mx-10 flex flex-col justify-center sm:py-12">
       <div className="py-3 sm:max-w-xl sm:mx-auto">
@@ -23,10 +24,34 @@ const MovieCard = ({ title, description, posterURL, rating }) => {
               <div className="text-sm text-gray-400">Series</div>
               <div className="text-lg text-gray-800">2019</div>
             </div> */}
-            <p className=" text-gray-400 max-h-40 overflow-y-hidden">
+            <p className=" text-gray-400 max-h-40 overflow-y-auto  scrollbar-hide">
               {description}
             </p>
-            {/* <div className="flex text-2xl font-bold text-a">$83.90</div> */}
+            <Link
+              className="group relative inline-flex w-44 items-center overflow-hidden rounded bg-indigo-600 px-8 py-3 text-white focus:outline-none focus:ring active:bg-indigo-500"
+              to={`/movies/${id}`}
+            >
+              <span className="absolute right-0 translate-x-full transition-transform group-hover:-translate-x-4">
+                <svg
+                  className="h-5 w-5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
+                </svg>
+              </span>
+
+              <span className="text-sm font-medium transition-all group-hover:mr-4">
+                Watch Trailer
+              </span>
+            </Link>
           </div>
         </div>
       </div>

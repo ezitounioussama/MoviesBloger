@@ -13,10 +13,12 @@ function MovieList({ movies, titleFilter, ratingFilter }) {
       {filteredMovies.map((movie) => (
         <MovieCard
           key={movie.id}
+          id={movie.id}
           title={movie.title}
           posterURL={movie.posterURL}
           description={movie.description}
           rating={movie.rating}
+          trailer={movie.trailer}
         />
       ))}
     </div>
