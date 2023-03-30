@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 function AddForm({ onAddMovie }) {
   const [title, setTitle] = useState("");
   const [rate, setRate] = useState("");
   const [url, setUrl] = useState("");
   const [description, setDescription] = useState("");
+  const [trailer, setTrailer] = useState("");
+
   AddForm.propTypes = {
     onAddMovie: PropTypes.func.isRequired,
   };
@@ -16,12 +18,18 @@ function AddForm({ onAddMovie }) {
       description: description,
       posterURL: url,
       rating: rate,
+      trailer: trailer,
     };
+
+    // Call the onAddMovie function with the new movie
     onAddMovie(newMovie);
+
+    // Clear the form fields
     setTitle("");
     setRate("");
     setUrl("");
     setDescription("");
+    setTrailer("");
   };
 
   return (
@@ -83,10 +91,23 @@ function AddForm({ onAddMovie }) {
                 <span>Url</span>
                 <input
                   type="text"
-                  placeholder="Enter Url 🔗"
+                  placeholder="Image URL🔗"
                   className="input input-bordered w-full max-w-xs"
                   value={url}
                   onChange={(event) => setUrl(event.target.value)}
+                />
+              </label>
+            </div>
+
+            <div className="form-control my-2">
+              <label className="input-group">
+                <span>Trailer</span>
+                <input
+                  type="text"
+                  placeholder="Trailer URL🔗"
+                  className="input input-bordered w-full max-w-xs"
+                  value={trailer}
+                  onChange={(event) => setTrailer(event.target.value)}
                 />
               </label>
             </div>

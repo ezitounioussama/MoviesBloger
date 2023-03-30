@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import MovieCard from "./MovieCard";
 
-function MovieList({ movies, titleFilter, ratingFilter }) {
+function MovieList({ titleFilter, ratingFilter }) {
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    const storedMovies = localStorage.getItem("movies");
+    if (storedMovies) {
+      setMovies(JSON.parse(storedMovies));
+    }
+  }, []);
+
   const filteredMovies = movies
     .filter((movie) =>
       movie.title.toLowerCase().includes(titleFilter.toLowerCase())
