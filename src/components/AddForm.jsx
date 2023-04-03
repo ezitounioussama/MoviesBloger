@@ -13,7 +13,7 @@ function AddForm({ onAddMovie }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const newMovie = {
-      id: Math.random(),
+      id: Math.floor(Math.random() * 1000000000),
       title: title,
       description: description,
       posterURL: url,

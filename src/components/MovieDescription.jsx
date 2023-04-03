@@ -5,7 +5,7 @@ import MovieCard from "./MovieCard";
 function MovieDescription() {
   const { movieId } = useParams();
 
-  const [movie, setMovie] = useState(null);
+  const [movie, setMovie] = useState([]);
 
   useEffect(() => {
     const movies = JSON.parse(localStorage.getItem("movies"));
